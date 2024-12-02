@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Zenrock</title>
+  </head>
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=450 height=900 tabindex="-1" style="width: 450px; height: 900px; background: #231F20"></canvas>
+    <script src="Build/zenrock-build.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/zenrock-build.data",
+        frameworkUrl: "Build/zenrock-build.framework.js",
+        codeUrl: "Build/zenrock-build.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Zenrock",
+        productVersion: "1.0.56",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }).then(instance => {
+        const gameData = {
+          characterImageUrl: "https://zenrock-tg-miniapp-avatars.s3.eu-west-1.amazonaws.com/b7b53f0cc1ba3e7ce13cfd5224be2379-pfp.png",
+          nickname: "TestUser",
+          clanName: "Dev",
+          points: 50,
+          stage: 1,
+          dailyGamesLeft: 3,
+          maxDailyGames: 25,
+          ownedCaffeine: 2,
+          ownedBoosts: [
+          {
+            id: "50234138-6cdc-4dcd-b61b-0ab22a2e7dae",
+            quantity: 2,
+            active: ["2024-10-31T18:31:08.357Z"]
+          },
+          {
+            id: "255ac940-c2bb-4ba2-90f7-4bf1f7832327",
+            quantity: 2
+          },
+          {
+            id: "84934c4d-81af-47cf-a897-fd162a5c79b8",
+            quantity: 2
+          },
+          {
+            id: "329c2cb8-3b42-41b2-8e57-2a2f43e1b4f6",
+            quantity: 2
+          }]
+        }
+        instance.Module.Zenrock.SendPlayerData(gameData);
+      });
+    </script>
+  </body>
+</html>

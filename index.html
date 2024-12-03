@@ -25,13 +25,13 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/zenrock-build.data",
-        frameworkUrl: "Build/zenrock-build.framework.js",
-        codeUrl: "Build/zenrock-build.wasm",
+        dataUrl: "Build/zenrock-build.data.gz",
+        frameworkUrl: "Build/zenrock-build.framework.js.gz",
+        codeUrl: "Build/zenrock-build.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Zenrock",
-        productVersion: "1.0.64",
+        productVersion: "1.0.65",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       }).then(instance => {
